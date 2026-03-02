@@ -1,4 +1,3 @@
-import nanoId from 'nano-id';
 import { memo, useState } from 'react';
 
 const FileTree = memo(({ name, node }) => {
@@ -18,7 +17,7 @@ const FileTree = memo(({ name, node }) => {
                     Object.entries(node.children).map(
                         ([childName, childNode]) => (
                             <FileTree
-                                key={nanoId()}
+                                key={`${name}/${childName}`}
                                 name={childName}
                                 node={childNode}
                             />

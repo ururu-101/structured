@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import FileTree from './FileTree';
-import nanoId from 'nano-id';
 
 function App() {
     const [data, setData] = useState(null);
+
     useEffect(() => {
         async function getData() {
-            const res = await fetch('http://localhost:3001/root');
+            const res = await fetch('data.json');
             const data = await res.json();
-            setData(data);
+            setData(data.root);
         }
         getData();
     }, []);
@@ -16,9 +16,9 @@ function App() {
     return (
         <>
             {data &&
-                Object.entries(data).map(([name, node]) => (
-                    <FileTree key={nanoId()} name={name} node={node} />
-                ))}
+                Object.entries(data).map(([name, node]) => {
+                    return <FileTree key={name} name={name} node={node} />;
+                })}
         </>
     );
 }
